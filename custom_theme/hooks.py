@@ -34,12 +34,22 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/custom_theme/css/custom_theme.css"
-# app_include_js = "/assets/custom_theme/js/custom_theme.js"
+# Bundles (public/**/*.bundle.*) are built by `bench build` into hashed files, so browsers
+# reload them after every deploy. Sources: public/scss/_brand.scss, _desk.scss, _website.scss.
+app_include_css = "custom_theme_desk.bundle.css"
+app_include_js = "custom_theme_desk.bundle.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/custom_theme/css/custom_theme.css"
+web_include_css = "custom_theme_web.bundle.css"
 # web_include_js = "/assets/custom_theme/js/custom_theme.js"
+
+# Branding
+# ------------------
+# The logo shown on the login page, website and desk comes from Website Settings and Navbar
+# Settings; after_install fills those in (see install.py). This one is only this app's own icon.
+app_logo_url = "/assets/custom_theme/images/logo.svg"
+
+after_install = "custom_theme.install.after_install"
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "custom_theme/public/scss/website"

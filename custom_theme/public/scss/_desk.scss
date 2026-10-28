@@ -1,0 +1,214 @@
+/*
+ * Desk (/app) theme: crimson primary, charcoal sidebar and dock.
+ * Colours come from _brand.scss; this file only maps them onto Frappe's tokens.
+ *
+ * Frappe v16 styles everything through CSS custom properties (frappe/public/css/espresso),
+ * so overriding tokens is enough for most of the UI and survives Frappe upgrades better than
+ * restyling individual components.
+ */
+
+/* ---- Primary colour ---- */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+	--primary: var(--brand-primary);
+	--primary-color: var(--brand-primary);
+	--btn-primary: var(--brand-primary);
+	--brand-color: var(--brand-primary);
+	--progress-bar-bg: var(--brand-primary);
+	--date-active-bg: var(--brand-primary);
+	--date-active-text: var(--brand-on-primary);
+	--checkbox-color: var(--brand-primary);
+	--ink-blue-link: var(--brand-link);
+	--focus-default: 0 0 0 2px var(--brand-ring);
+}
+
+/* v16 buttons (.es-button): the solid variant is the primary action. The red theme is left
+   alone, since it is used for destructive actions. */
+.es-button:not([data-theme="red"]):not(.btn-danger) {
+	--bt-solid-bg: var(--brand-primary);
+	--bt-solid-bg-hover: var(--brand-primary-hover);
+	--bt-solid-bg-active: var(--brand-primary-active);
+	--bt-solid-fg: var(--brand-on-primary);
+}
+
+/* older .btn-primary buttons */
+.btn.btn-primary {
+	color: var(--brand-on-primary);
+	--icon-fill-bg: var(--btn-primary);
+}
+
+.btn.btn-primary:hover,
+.btn.btn-primary:focus-visible {
+	background-color: var(--brand-primary-hover);
+	color: var(--brand-on-primary);
+}
+
+.btn.btn-primary:active {
+	background-color: var(--brand-primary-active) !important;
+	color: var(--brand-on-primary) !important;
+}
+
+.btn.btn-primary-light {
+	background-color: var(--brand-primary-soft);
+	color: var(--brand-primary-soft-text);
+}
+
+input[type="checkbox"]:checked {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+}
+
+.form-tabs-list .form-tabs .nav-item .nav-link.active {
+	border-bottom-color: var(--brand-primary);
+	color: var(--heading-color);
+}
+
+/* ---- Charcoal shell: the sidebar panel and the app dock ----
+ *
+ * Both are drawn with Frappe's surface/ink/outline tokens, so re-declaring those tokens on
+ * the two containers turns them dark without touching their markup. Aliases such as
+ * --text-color are resolved where they are declared (:root), so they are re-declared here too.
+ */
+
+.body-sidebar,
+.dock {
+	color-scheme: dark;
+	--desk-sidebar-bg: var(--charcoal-900);
+
+	--surface-base: var(--charcoal-900);
+	--surface-gray-1: var(--charcoal-800);
+	--surface-gray-2: var(--charcoal-750);
+	--surface-gray-3: var(--charcoal-700);
+	--surface-gray-4: var(--charcoal-600);
+	--surface-elevation-1: var(--charcoal-800);
+	--surface-elevation-2: var(--charcoal-800);
+	--surface-elevation-3: var(--charcoal-750);
+
+	--ink-gray-4: var(--charcoal-500);
+	--ink-gray-5: var(--charcoal-400);
+	--ink-gray-6: var(--charcoal-300);
+	--ink-gray-7: var(--charcoal-200);
+	--ink-gray-8: var(--charcoal-100);
+	--ink-gray-9: var(--charcoal-50);
+
+	--outline-gray-1: var(--charcoal-800);
+	--outline-gray-2: var(--charcoal-700);
+	--outline-gray-3: var(--charcoal-600);
+	--outline-gray-4: var(--charcoal-500);
+
+	--text-color: var(--charcoal-100);
+	--heading-color: var(--charcoal-50);
+	--text-muted: var(--charcoal-400);
+	--text-light: var(--charcoal-500);
+	--border-color: var(--charcoal-800);
+	--control-bg: var(--charcoal-800);
+	--fg-hover-color: var(--charcoal-750);
+	--sidebar-select-color: var(--charcoal-750);
+	--shadow-sm: none;
+
+	color: var(--charcoal-100);
+}
+
+.body-sidebar {
+	background: var(--charcoal-900);
+	border-right-color: var(--charcoal-950);
+}
+
+.dock {
+	--dock-bg: var(--charcoal-950);
+	--dock-ink: var(--charcoal-400);
+	--dock-ink-hover: var(--charcoal-100);
+	--dock-ink-active: var(--brand-on-primary);
+	--surface-gray-2: var(--charcoal-800);
+	background: var(--charcoal-950);
+	border-color: var(--charcoal-950);
+}
+
+/* active row: tinted fill with a crimson bar on the left */
+.body-sidebar .active-sidebar {
+	background: rgba(239, 68, 68, 0.16);
+	box-shadow: inset 3px 0 0 var(--brand-500);
+}
+
+.body-sidebar .active-sidebar,
+.body-sidebar .active-sidebar .item-anchor,
+.body-sidebar .active-sidebar .sidebar-item-label {
+	color: var(--charcoal-50);
+}
+
+.body-sidebar .active-sidebar .sidebar-item-icon,
+.body-sidebar .active-sidebar svg {
+	color: var(--brand-300);
+}
+
+/* active app in the dock: solid crimson tile */
+.dock .dock-item.active {
+	background: var(--brand-primary);
+	color: var(--brand-on-primary);
+	box-shadow: none;
+}
+
+/* ---- Menus opened from inside the shell keep the normal page colours ---- */
+
+[data-theme="light"] .body-sidebar :is(.dropdown-menu, .popover),
+[data-theme="light"] .dock :is(.dropdown-menu, .popover) {
+	color-scheme: light;
+	--surface-base: var(--white);
+	--surface-gray-1: var(--gray-50);
+	--surface-gray-2: var(--gray-100);
+	--surface-gray-3: var(--gray-200);
+	--surface-gray-4: var(--gray-300);
+	--surface-elevation-1: var(--white);
+	--surface-elevation-2: var(--white);
+	--surface-elevation-3: var(--white);
+	--ink-gray-4: var(--gray-500);
+	--ink-gray-5: var(--gray-600);
+	--ink-gray-6: var(--gray-700);
+	--ink-gray-7: var(--gray-800);
+	--ink-gray-8: var(--gray-900);
+	--ink-gray-9: var(--gray-950);
+	--outline-gray-1: var(--gray-200);
+	--outline-gray-2: var(--gray-300);
+	--outline-gray-3: var(--gray-400);
+	--outline-gray-4: var(--gray-500);
+	--text-color: var(--gray-900);
+	--heading-color: var(--gray-950);
+	--text-muted: var(--gray-700);
+	--text-light: var(--gray-600);
+	--border-color: var(--gray-200);
+	--control-bg: var(--gray-100);
+	--fg-hover-color: var(--gray-100);
+	color: var(--gray-900);
+}
+
+[data-theme="dark"] .body-sidebar :is(.dropdown-menu, .popover),
+[data-theme="dark"] .dock :is(.dropdown-menu, .popover) {
+	--surface-base: var(--gray-950);
+	--surface-gray-1: var(--gray-900);
+	--surface-gray-2: var(--gray-700);
+	--surface-gray-3: var(--gray-600);
+	--surface-gray-4: var(--gray-500);
+	--surface-elevation-1: var(--gray-900);
+	--surface-elevation-2: var(--gray-800);
+	--surface-elevation-3: var(--gray-600);
+	--ink-gray-4: var(--gray-400);
+	--ink-gray-5: var(--gray-400);
+	--ink-gray-6: var(--gray-300);
+	--ink-gray-7: var(--gray-200);
+	--ink-gray-8: var(--gray-100);
+	--ink-gray-9: var(--gray-50);
+	--outline-gray-1: var(--gray-800);
+	--outline-gray-2: var(--gray-600);
+	--outline-gray-3: var(--gray-500);
+	--outline-gray-4: var(--gray-450);
+	--text-color: var(--gray-100);
+	--heading-color: var(--gray-50);
+	--text-muted: var(--gray-300);
+	--text-light: var(--gray-400);
+	--border-color: var(--gray-800);
+	--control-bg: var(--gray-700);
+	--fg-hover-color: var(--gray-700);
+	color: var(--gray-100);
+}

@@ -1,0 +1,142 @@
+/*
+ * Website theme: public pages, portal (/me) and the login page.
+ * Colours come from _brand.scss; this file maps them onto Frappe's website markup.
+ */
+
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+	--primary: var(--brand-primary);
+	--primary-color: var(--brand-primary);
+	--btn-primary: var(--brand-primary);
+	--brand-color: var(--brand-primary);
+	--ink-blue-link: var(--brand-link);
+	--focus-default: 0 0 0 2px var(--brand-ring);
+}
+
+/* ---- Buttons ---- */
+
+.es-button:not([data-theme="red"]):not(.btn-danger) {
+	--bt-solid-bg: var(--brand-primary);
+	--bt-solid-bg-hover: var(--brand-primary-hover);
+	--bt-solid-bg-active: var(--brand-primary-active);
+	--bt-solid-fg: var(--brand-on-primary);
+}
+
+.btn.btn-primary {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+	color: var(--brand-on-primary);
+
+	&:hover,
+	&:focus-visible {
+		background-color: var(--brand-primary-hover);
+		border-color: var(--brand-primary-hover);
+		color: var(--brand-on-primary);
+	}
+
+	&:not(:disabled):not(.disabled):active {
+		background-color: var(--brand-primary-active);
+		border-color: var(--brand-primary-active);
+		color: var(--brand-on-primary);
+	}
+}
+
+.btn.btn-outline-primary {
+	border: 1px solid var(--brand-primary);
+	color: var(--brand-primary);
+
+	&:hover,
+	&:not(:disabled):not(.disabled):active {
+		background-color: var(--brand-primary);
+		color: var(--brand-on-primary);
+	}
+}
+
+/* ---- Links in page content (navbar and footer are styled below) ---- */
+
+main a:not(.btn):not(.es-button):not(.nav-link) {
+	color: var(--brand-link);
+
+	&:hover {
+		color: var(--brand-link-hover);
+	}
+}
+
+/* ---- Navbar: white with a crimson line on top ---- */
+
+.navbar {
+	border-top: 3px solid var(--brand-primary);
+
+	.nav-link:hover {
+		color: var(--brand-primary);
+	}
+
+	.nav-item.active {
+		border-bottom: 2px solid var(--brand-primary);
+
+		.nav-link {
+			color: var(--heading-color);
+		}
+	}
+}
+
+/* ---- Footer: charcoal ---- */
+
+.web-footer {
+	background: var(--charcoal-900);
+	border-top: 3px solid var(--brand-primary);
+	color: var(--charcoal-300);
+
+	a,
+	.text-muted,
+	.footer-link,
+	.footer-info,
+	.footer-col-left,
+	.footer-col-right {
+		color: var(--charcoal-300) !important;
+	}
+
+	a:hover {
+		color: var(--charcoal-50) !important;
+	}
+
+	.footer-group-label,
+	h5,
+	h6 {
+		color: var(--charcoal-50);
+	}
+
+	.footer-subscribe-label {
+		color: var(--charcoal-300);
+	}
+}
+
+/* ---- Login and other card pages ---- */
+
+body[data-path="login"],
+body[data-path="update-password"] {
+	background:
+		radial-gradient(circle at 0% 0%, rgba(185, 28, 28, 0.1), transparent 45%),
+		radial-gradient(circle at 100% 100%, rgba(14, 165, 233, 0.08), transparent 40%),
+		var(--brand-surface);
+}
+
+[data-theme="dark"] body[data-path="login"],
+[data-theme="dark"] body[data-path="update-password"] {
+	background:
+		radial-gradient(circle at 0% 0%, rgba(239, 68, 68, 0.14), transparent 45%),
+		var(--surface-base);
+}
+
+.page-card {
+	border-top: 4px solid var(--brand-primary);
+	box-shadow:
+		0 1px 2px rgba(28, 25, 23, 0.06),
+		0 12px 32px -8px rgba(28, 25, 23, 0.16);
+
+	.app-logo {
+		width: 44px;
+		height: 44px;
+	}
+}
