@@ -140,3 +140,228 @@ body[data-path="update-password"] {
 		height: 44px;
 	}
 }
+
+/* ---- Homepage (custom_theme/www/home.html) ---- */
+
+.ct-hero {
+	background:
+		radial-gradient(circle at 85% 20%, rgba(239, 68, 68, 0.35), transparent 45%),
+		radial-gradient(circle at 10% 110%, rgba(14, 165, 233, 0.18), transparent 40%),
+		var(--charcoal-900);
+	color: var(--charcoal-100);
+	padding: 96px 0 104px;
+
+	.ct-eyebrow {
+		color: var(--brand-300);
+		font-size: 0.875rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		margin-bottom: 16px;
+		text-transform: uppercase;
+	}
+
+	.ct-hero-title {
+		color: #ffffff;
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0 0 20px;
+		max-width: 760px;
+	}
+
+	.ct-hero-subtitle {
+		color: var(--charcoal-300);
+		font-size: 1.125rem;
+		margin-bottom: 36px;
+		max-width: 620px;
+	}
+
+	.ct-hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.ct-btn-ghost {
+		border: 1px solid var(--charcoal-500);
+		color: var(--charcoal-50);
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.08);
+			border-color: var(--charcoal-300);
+			color: #ffffff;
+		}
+	}
+}
+
+.ct-section {
+	padding-top: 64px;
+
+	h2 {
+		font-size: 1.75rem;
+		font-weight: 700;
+		margin: 0;
+	}
+}
+
+.ct-section-head {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: space-between;
+	margin-bottom: 24px;
+}
+
+.ct-products {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+main a.ct-product {
+	background: var(--surface-base);
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+	color: var(--text-color);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	text-decoration: none !important;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+
+	&:hover {
+		border-color: var(--brand-300);
+		box-shadow: 0 12px 28px -12px rgba(28, 25, 23, 0.25);
+		color: var(--text-color);
+		transform: translateY(-2px);
+	}
+}
+
+.ct-product-image {
+	align-items: center;
+	aspect-ratio: 4 / 3;
+	background: var(--brand-50);
+	display: flex;
+	justify-content: center;
+
+	img {
+		height: 100%;
+		object-fit: cover;
+		width: 100%;
+	}
+}
+
+.ct-product-initial {
+	color: var(--brand-primary);
+	font-size: 2.5rem;
+	font-weight: 700;
+}
+
+.ct-product-body {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 16px;
+}
+
+.ct-product-group {
+	color: var(--text-muted);
+	font-size: 0.75rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.ct-product-name {
+	color: var(--heading-color);
+	font-weight: 600;
+}
+
+.ct-product-price {
+	color: var(--brand-primary);
+	font-weight: 700;
+	margin-top: 4px;
+}
+
+.ct-empty {
+	color: var(--text-muted);
+}
+
+.ct-features {
+	display: grid;
+	gap: 20px;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.ct-feature {
+	background: var(--brand-surface);
+	border-radius: 12px;
+	padding: 28px;
+
+	h3 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin: 16px 0 8px;
+	}
+
+	p {
+		color: var(--text-muted);
+		margin: 0;
+	}
+}
+
+.ct-feature-icon {
+	background: var(--brand-primary-soft);
+	border-radius: 10px;
+	color: var(--brand-primary);
+	height: 44px;
+	padding: 10px;
+	width: 44px;
+}
+
+.ct-band {
+	background: var(--charcoal-900);
+	color: var(--charcoal-300);
+	margin-top: 72px;
+	padding: 48px 0;
+
+	.container {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+		justify-content: space-between;
+	}
+
+	h2 {
+		color: #ffffff;
+		font-size: 1.5rem;
+		margin: 0 0 6px;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+/* ---- Webshop (/all-products, product pages, cart) ---- */
+
+/* the selected list/grid toggle: webshop paints it gray with a gray icon. Webshop's CSS loads
+   after this file, so the selector is one class stronger than its `#toggle-view .btn-primary`. */
+#toggle-view .btn.btn-primary {
+	background-color: var(--brand-primary);
+	border-color: var(--brand-primary);
+	--icon-stroke: var(--brand-on-primary);
+
+	.icon {
+		stroke: var(--brand-on-primary);
+	}
+}
+
+/* products without a picture: initials on a soft crimson tile, like the homepage */
+/* .no-image (grid), .no-image-list (list), .no-image-item (product page) */
+.card-img-top[class*="no-image"] {
+	background: var(--brand-50) !important;
+	color: var(--brand-primary) !important;
+	font-weight: 700;
+}

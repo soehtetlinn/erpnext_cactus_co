@@ -27,6 +27,11 @@ def apply_branding(force=False):
 		website.app_name = BRAND_NAME
 	if force or not website.copyright:
 		website.copyright = BRAND_NAME
+	# visitors who are not logged in get the homepage (www/home.html) instead of the login page
+	if force or not website.home_page:
+		website.home_page = "home"
+	if not website.top_bar_items:
+		website.append("top_bar_items", {"label": "Shop", "url": "/all-products"})
 	website.save(ignore_permissions=True)
 
 	navbar = frappe.get_single("Navbar Settings")

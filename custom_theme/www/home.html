@@ -1,0 +1,87 @@
+{% extends "templates/web.html" %}
+
+{% macro icon(name) -%}
+<svg class="ct-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+	{%- if name == "truck" -%}
+	<path d="M3 6h11v9H3z"/><path d="M14 9h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>
+	{%- elif name == "shield" -%}
+	<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>
+	{%- else -%}
+	<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/>
+	{%- endif -%}
+</svg>
+{%- endmacro %}
+
+{% block hero %}
+<section class="ct-hero">
+	<div class="container">
+		<p class="ct-eyebrow">{{ hero.eyebrow }}</p>
+		<h1 class="ct-hero-title">{{ hero.title }}</h1>
+		<p class="ct-hero-subtitle">{{ hero.subtitle }}</p>
+		<div class="ct-hero-actions">
+			<a class="btn btn-primary btn-lg" href="{{ shop_route }}">{{ _("Shop now") }}</a>
+			{% if frappe.session.user == "Guest" %}
+			<a class="btn btn-lg ct-btn-ghost" href="/login">{{ _("Customer login") }}</a>
+			{% else %}
+			<a class="btn btn-lg ct-btn-ghost" href="/me">{{ _("My account") }}</a>
+			{% endif %}
+		</div>
+	</div>
+</section>
+{% endblock %}
+
+{% block page_content %}
+<section class="ct-section container">
+	<div class="ct-section-head">
+		<h2>{{ _("Featured products") }}</h2>
+		<a href="{{ shop_route }}">{{ _("View all products") }} &rarr;</a>
+	</div>
+
+	{% if products %}
+	<div class="ct-products">
+		{% for p in products %}
+		<a class="ct-product" href="/{{ p.route }}">
+			<div class="ct-product-image">
+				{% if p.image %}
+				<img src="{{ p.image }}" alt="{{ p.web_item_name }}" loading="lazy">
+				{% else %}
+				<span class="ct-product-initial">{{ (p.web_item_name or "?")[0] }}</span>
+				{% endif %}
+			</div>
+			<div class="ct-product-body">
+				<span class="ct-product-group">{{ p.item_group }}</span>
+				<span class="ct-product-name">{{ p.web_item_name }}</span>
+				{% if p.price %}<span class="ct-product-price">{{ p.price }}</span>{% endif %}
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+	{% else %}
+	<p class="ct-empty">{{ _("New products are coming soon.") }}</p>
+	{% endif %}
+</section>
+
+<section class="ct-section container">
+	<div class="ct-features">
+		{% for f in features %}
+		<div class="ct-feature">
+			{{ icon(f.icon) }}
+			<h3>{{ f.title }}</h3>
+			<p>{{ f.text }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+<section class="ct-band">
+	<div class="container">
+		<div>
+			<h2>{{ _("Already a customer?") }}</h2>
+			<p>{{ _("Log in to see your quotations, orders and invoices.") }}</p>
+		</div>
+		<a class="btn btn-primary btn-lg" href="{{ '/login' if frappe.session.user == 'Guest' else '/me' }}">
+			{{ _("Go to my account") }}
+		</a>
+	</div>
+</section>
+{% endblock %}
