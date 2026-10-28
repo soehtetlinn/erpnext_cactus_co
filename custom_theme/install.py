@@ -1,6 +1,6 @@
 import frappe
 
-BRAND_NAME = "Cactus Co.,Ltd"
+BRAND_NAME = "Cactus Tree Co.,Ltd"
 LOGO = "/assets/custom_theme/images/logo.svg"
 
 # app_name ships as "Frappe" and ERPNext's installer sets it to "ERPNext": both count as unset

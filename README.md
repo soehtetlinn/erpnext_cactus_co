@@ -34,7 +34,7 @@ bench --site <site> install-app custom_theme
 
 Install it on a site that has `erpnext`, `payments`, `webshop` and `hrms` (all on `version-16`).
 
-Installing sets the brand name **Cactus Co.,Ltd** (`BRAND_NAME` in `install.py`) as the app name
+Installing sets the brand name **Cactus Tree Co.,Ltd** (`BRAND_NAME` in `install.py`) as the app name
 and website copyright, makes `/home` the site's home page, and points the logo fields in Website
 Settings and Navbar Settings at the theme logo. Only fields still at their empty or stock values are changed. To apply them all again
 (for example after replacing `logo.svg` or changing `BRAND_NAME`):

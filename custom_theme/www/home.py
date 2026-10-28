@@ -2,13 +2,15 @@ import frappe
 from frappe import _
 from frappe.utils import fmt_money
 
+from custom_theme.install import BRAND_NAME
+
 # The public homepage (route /home, set as the site's home page by install.py).
 # Text lives here so it can be edited without touching the layout in home.html.
+# The company name comes from Website Settings → App Name.
 
 no_cache = 1
 
 HERO = {
-	"eyebrow": _("Welcome to Cactus Co.,Ltd"),
 	"title": _("Quality products, delivered across Thailand"),
 	"subtitle": _("Browse our catalogue, order online and track every order and invoice in your customer account."),
 }
@@ -25,8 +27,9 @@ FEATURED_PRODUCT_COUNT = 8
 def get_context(context):
 	context.no_breadcrumbs = True
 	context.full_width = True
-	context.title = frappe.db.get_single_value("Website Settings", "app_name") or "Cactus Co.,Ltd"
-	context.hero = HERO
+	brand = frappe.db.get_single_value("Website Settings", "app_name") or BRAND_NAME
+	context.title = brand
+	context.hero = {**HERO, "eyebrow": _("Welcome to {0}").format(brand)}
 	context.features = FEATURES
 	context.products = get_featured_products()
 	context.shop_route = "/all-products"
